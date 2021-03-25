@@ -25,16 +25,23 @@
 
 <body>
   <div class="container">
-    <div id="fart">fart</div>
+    <div>
+      <div id="fart">fart</div>
+      <div id="whip">whip</div>
+    </div>
   </div>
 </body>
 
 <script>
-  document.getElementById("fart").addEventListener("click", playFart);
-  function playFart() {
-    fartAudio = new Audio("sounds/fart.mp3");
-    fartAudio.play();
-  }
+  sounds = ["fart", "whip"]
+  sounds.forEach((sound) => {
+    document.getElementById(sound).addEventListener("click", playSound);
+
+    function playSound() {
+      audio = new Audio("sounds/" + sound + ".mp3");
+      audio.play();
+    }
+  })
 </script>
 
 </html>
