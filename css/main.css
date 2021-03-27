@@ -14,8 +14,9 @@
 .play {
   margin: 10;
   border-radius: 50%;
-  height: 60;
-  width: 60;
+  height: 70;
+  width: 70;
+  font-size: 16px;
   background-color: white;
   border-color: red;
   color: unset;
