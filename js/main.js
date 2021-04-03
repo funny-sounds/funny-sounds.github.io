@@ -13,6 +13,7 @@ sounds.forEach((sound) => {
 
   function playSound() {
     audio = audios[sound];
+    audio.currentTime = 0;
     audioContext = audioContext || new AudioContext();
     if (!tracks[sound]) {
       const track = audioContext.createMediaElementSource(audio);
