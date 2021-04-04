@@ -1,4 +1,7 @@
-// for legacy browsers
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("js/sw.js");
+}
+
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 let audioContext;
