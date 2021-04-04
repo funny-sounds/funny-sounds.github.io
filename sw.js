@@ -7,6 +7,7 @@ registerRoute(({url}) => url.pathname.startsWith("/sounds/"), new StaleWhileReva
 registerRoute(({url}) => url.pathname.startsWith("/images/"), new StaleWhileRevalidate());
 registerRoute(({url}) => url.pathname.startsWith("/js/"), new StaleWhileRevalidate());
 registerRoute(({url}) => url.pathname.startsWith("/css/"), new StaleWhileRevalidate());
+registerRoute(({url}) => url.pathname === "/manifest.json", new StaleWhileRevalidate());
 registerRoute(({url}) => url.pathname === "/", new StaleWhileRevalidate());
 
 self.skipWaiting();
