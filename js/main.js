@@ -11,7 +11,9 @@ audios = {};
 tracks = {};
 
 sounds.forEach((sound) => {
-  audios[sound] = new Audio("sounds/" + sound + ".mp3");
+  audios[sound] = new Audio();
+  audios[sound].crossOrigin = "anonymous";
+  audios[sound].src = "sounds/" + sound + ".mp3";
   document.getElementById(sound).addEventListener("click", playSound);
 
   function playSound() {
