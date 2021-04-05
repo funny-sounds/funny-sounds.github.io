@@ -5,26 +5,30 @@ if ("serviceWorker" in navigator) {
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 let audioContext;
+let source;
 
 sounds = ["fart", "burp", "whip", "cricket", "bell", "gun", "duck", "laughter", "kiss"];
-audios = {};
-tracks = {};
 
 sounds.forEach((sound) => {
-  audios[sound] = new Audio();
-  audios[sound].crossOrigin = "anonymous";
-  audios[sound].src = "sounds/" + sound + ".mp3";
   document.getElementById(sound).addEventListener("click", playSound);
 
   function playSound() {
-    audio = audios[sound];
-    audio.currentTime = 0;
-    audioContext = audioContext || new AudioContext();
-    if (!tracks[sound]) {
-      const track = audioContext.createMediaElementSource(audio);
-      track.connect(audioContext.destination);
-      tracks[sound] = track;
+    if (source) {
+      source.stop();
     }
-    audio.play();
+    audioContext = audioContext || new AudioContext();
+    var request = new XMLHttpRequest();
+
+    source = audioContext.createBufferSource();
+    source.connect(audioContext.destination);
+    request.responseType = "arraybuffer";
+    request.open("GET", "/sounds/" + sound + ".mp3", true);
+    request.onload = function () {
+      audioContext.decodeAudioData(request.response, function (buffer) {
+        source.buffer = buffer;
+        source.start(0);
+      });
+    };
+    request.send();
   }
 });
